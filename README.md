@@ -17,11 +17,15 @@ You can see how a professional programmer creates personalized, data-driven docu
 3. Adding tables to existing databases
 4. Adding data to more than one table
 5. Updating multiple records simultaneously
-6. Generating summary reports
-
+6. Generating summary reports.
 
 **My Solutions:**
 I have uploaded two text files (one for each database) with the challenge, its difficulty level, and my query to solve the problem. 
 All the queries were run on sqlite to check for correctness and derired outputs. 
+
+
+**About the files:**
+The '.db' files can be opened in sqlite, to access the database. 
+The '.txt' files include description of the challenge and a query to solve the challenge
 
 
