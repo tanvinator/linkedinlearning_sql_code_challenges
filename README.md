@@ -6,6 +6,7 @@ Get hands-on practice querying and retrieving data, adding new tables to existin
 LinkedIn Learning staff instructor Scott Simpson structures each challenge in real-world scenarios: 
   1. a restaurant website that takes reservations and online orders 
   2. a library lending system. 
+
 After each challenge, Scott shares his own solution. 
 You can see how a professional programmer creates personalized, data-driven documents; handles sign-up data; deletes records; prepares reports; and more.
 
