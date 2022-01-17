@@ -1,0 +1,91 @@
+--Challenge 1: Difficulty 1/4
+--Check Book availability
+----Challenge Description:
+------- Find the number of available copies of Dracula
+----Requirements:
+------- 
+
+--Query:
+SELECT
+--Querying total number of books
+	(SELECT COUNT(BookID)
+	 FROM Books
+	 WHERE Title = 'Dracula')
+--Subtracting the loaned books query
+		-
+--Querying the loaned books
+	(SELECT COUNT(Books.Title)
+	 FROM Loans
+	 JOIN Books
+	 ON Books.BookID = Loans.BookID 
+	 WHERE Books.Title = 'Dracula'
+		 AND
+		 Loans.ReturnedDate IS NULL)
+AS available_books;
+
+--======================================================================================================
+--Challenge 2: Difficulty 2/4
+--Add to the books table
+
+--Query:
+
+INSERT INTO Books (Title, Author,Published, Barcode) VALUES 
+                  ("Dracula", "Bram Stoker", "1897", "4819277482"),
+                  ("Gulliver's Travels", "Jonathan Swift", "1729", "4899254401");
+
+
+SELECT *
+FROM Books
+WHERE Title IN ("Dracula", "Gulliver's Travels");
+
+--======================================================================================================
+--Challenge 3: Difficulty 3/4
+--Check Out two books to patron
+
+--Query:
+
+INSERT INTO Loans (BookID, PatronID, LoanDate, DueDate)
+VALUES 
+		((SELECT BookID FROM Books WHERE Title = "The Picture of Dorian Gray" AND Barcode = 2855934983),
+		(SELECT PatronID FROM Patrons WHERE FirstName = "Jack" AND LastName = "Vaan" AND Email = "jvaan@wisdompets.com"), 
+		"2020-08-25", "2020-09-08"),
+
+        ((SELECT BookID FROM Books WHERE Title = "Great Expectations" AND Barcode = 4043822646),
+	    (SELECT PatronID FROM Patrons WHERE FirstName = "Jack" AND LastName = "Vaan" AND Email = "jvaan@wisdompets.com"), 
+		"2020-08-25", "2020-09-08");
+
+SELECT * FROM Loans WHERE PatronID IN (SELECT PatroNID FROM Patrons WHERE FirstName = "Jack" AND LastName = "Vaan" AND Email = "jvaan@wisdompets.com");
+SELECT * FROM Books WHERE Title IN ("The Picture of Dorian Gray", "Great Expectations");
+
+--======================================================================================================
+--Challenge 4: Difficulty 3/4
+--Make a report on books due on July 13, 2020
+
+--Query:
+
+SELECT b.Title, 
+	   l.LoanDate, l.DueDate, 
+	   (p.FirstName || " " || p.LastName) AS PatronName, p.Email, 
+	   CASE 
+		WHEN l.ReturnedDate IS NULL THEN "Not Returned"
+		ELSE "Returned"
+	   END AS BookReturnStatus
+
+FROM Loans l
+JOIN Patrons p
+ON l.PatronID = p.PatronID
+JOIN Books b
+ON l.BookID = b.BookID
+WHERE l.DueDate = "2020-07-13"
+ORDER BY BookReturnStatus;
+
+--======================================================================================================
+--Challenge : Difficulty 3/4
+--Return books to the library
+---- Description:
+-------- Return the books on July 5, 2020
+
+--Query:
+
+
+
