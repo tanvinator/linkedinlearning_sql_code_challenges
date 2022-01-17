@@ -18,3 +18,10 @@ You can see how a professional programmer creates personalized, data-driven docu
 4. Adding data to more than one table
 5. Updating multiple records simultaneously
 6. Generating summary reports
+
+
+**My Solutions:**
+I have uploaded two text files (one for each database) with the challenge, its difficulty level, and my query to solve the problem. 
+All the queries were run on sqlite to check for correctness and derired outputs. 
+
+
