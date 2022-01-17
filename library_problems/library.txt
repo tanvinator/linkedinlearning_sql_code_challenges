@@ -86,6 +86,12 @@ ORDER BY BookReturnStatus;
 -------- Return the books on July 5, 2020
 
 --Query:
-
-
-
+UPDATE Loans SET ReturnedDate = "2020-07-15"
+WHERE BookID IN (SELECT BookID 
+				  FROM Books
+				  WHERE Barcode IN ("6435968624","5677520613","8730298424"))
+	AND ReturnedDate IS NULL;
+	
+SELECT * FROM Loans 
+WHERE ReturnedDate = "2020-07-15"; 
+				  
