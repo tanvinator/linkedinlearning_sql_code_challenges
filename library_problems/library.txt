@@ -80,7 +80,7 @@ WHERE l.DueDate = "2020-07-13"
 ORDER BY BookReturnStatus;
 
 --======================================================================================================
---Challenge : Difficulty 3/4
+--Challenge 5 : Difficulty 3/4
 --Return books to the library
 ---- Description:
 -------- Return the books on July 5, 2020
@@ -95,3 +95,54 @@ WHERE BookID IN (SELECT BookID
 SELECT * FROM Loans 
 WHERE ReturnedDate = "2020-07-15"; 
 				  
+--======================================================================================================
+--Challenge 6: Difficulty 4/4
+--Report the patrons (top 10) who have least book loans
+
+--Query:
+
+SELECT (FirstName || " " || LastName) AS PatronName, p.Email, 
+COUNT(l.LoanID) as numBookLoans
+FROM Loans l
+JOIN Patrons p
+ON l.PatronID = p.PatronID
+GROUP BY l.PatronID
+ORDER BY numBookLoans, PatronName
+LIMIT 10;
+
+--======================================================================================================
+--Challenge 7: Difficulty 4/4
+--Report the list of books from 1890s which are available in the library
+
+--Query:
+
+SELECT b.Title, b.BookID, b.Author, b.Published
+FROM Books b
+JOIN Loans l
+ON b.BookID = l.BookID
+WHERE b.Published LIKE "189_"
+AND l.ReturnedDate IS NOT NULL
+GROUP BY b.BookID
+ORDER BY Published, b.Title;
+
+--======================================================================================================
+--Challenge 8: Difficulty 4/4
+--Report the number of books published each year
+-- Report the most famous books for checkout
+
+--Query:
+
+SELECT Published, COUNT(DISTINCT(Title)) AS numBooks
+FROM Books
+GROUP BY Published
+ORDER BY numBooks DESC, Published;
+
+SELECT b.Title, b.Author, b.Published, COUNT(l.LoanID) AS numLoans
+FROM Loans l
+JOIN Books b
+ON l.BookID = b.BookID
+GROUP BY b.Title
+ORDER BY numLoans DESC, b.Published, b.Title 
+LIMIT 5;
+
+--======================================================================================================
